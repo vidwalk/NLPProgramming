@@ -24,6 +24,7 @@ def writeToText(path, pdfName):
 
 
 if __name__ == "__main__":
-    path = ""
+    filePath = open('path.txt', 'r', encoding='utf-8')
+    path = filePath.read()
     for pdfs in findPdfs(path):
         writeToText(path, pdfs)

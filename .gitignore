@@ -133,3 +133,6 @@ dmypy.json
 
 #Text files as result of pdf transformation
 TextFiles/
+
+#Path in my pc 
+path.txt
