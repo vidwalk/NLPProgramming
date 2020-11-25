@@ -1,0 +1,5 @@
+What is between * should be replaced with the desired input
+1. mkvirtualenv *virtual environment name*
+2. pip install --upgrade pip
+3. Install packages. If you have a requirements.txt file you can use that
+4. pip install PyMuPDF 
