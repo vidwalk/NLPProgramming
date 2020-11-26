@@ -2,6 +2,8 @@ import spacy
 import os
 from collections import defaultdict, Counter
 import csv
+from spacy.tokenizer import Tokenizer
+import re
 
 
 def findTxts(path):
@@ -16,18 +18,27 @@ def findTxts(path):
 if __name__ == "__main__":
     pos_counts = defaultdict(Counter)
     # python -m spacy download en_core_web_sm
-    nlp = spacy.load("en_core_web_sm", disable=[
-                     'parser', 'tagger', 'ner', 'entity_ruler'], max_length=1529140)
+    nlp = spacy.load("en_core_web_sm", max_length=1529140)
+    tokenizer = Tokenizer(nlp.vocab)
     for txtFile in findTxts('TextFiles'):
         filePath = open('TextFiles/' + txtFile, 'r', encoding='utf-8')
         text = filePath.read()
-        doc = nlp(text)
-        for token in doc:
+        # text to lowercase
+        text = text.lower()
+        # keep only letters, -, ' and space
+        text = re.sub(r"[^A-Za-z—\-\'\’ ]", ' ', text)
+        # replace multiple whitespace with just one
+        text = re.sub(r"\s+", ' ', text)
+        # tokenize the data
+        tokens = tokenizer(text)
+        for token in tokens:
+            #
             pos_counts[token.pos][token.orth] += 1
-    with open("Counts/SpacyWordFreqDict.csv", "w+", newline="", encoding='utf-32') as csv_file:
-        csv_file.write("%s, %s\n" % ('word', 'count'))
+        # 'w' open for writing '+' open a disk file for updating (reading and writing)
+    with open("Counts/SpacyWordFreqDict.csv", mode="w+", newline="", encoding='utf-8') as csv_file:
+        # headers
+        csv_file.write("%s,%s\n" % ('word', 'count'))
         for pos_id, counts in sorted(pos_counts.items()):
-            pos = doc.vocab.strings[pos_id]
             for orth_id, count in counts.most_common():
                 csv_file.write("%s, %d\n" %
-                               (doc.vocab.strings[orth_id], count))
+                               (tokens.vocab.strings[orth_id], count))
