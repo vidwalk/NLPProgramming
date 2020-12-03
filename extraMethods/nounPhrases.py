@@ -26,7 +26,7 @@ if __name__ == "__main__":
         filePath = open('TextFiles/' + txtFile, 'r', encoding='utf-8')
         text = filePath.read()
         text = text.lower()
-        text = re.sub(r"[^A-Za-z—\-\'\’ ]", ' ', text)
+        text = re.sub(r"[^A-Za-z—\-\'\’\, ]", ' ', text)
         text = re.sub(r"\s+", ' ', text)
         doc = nlp(text)
         count.extend(doc.noun_chunks)

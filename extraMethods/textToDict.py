@@ -2,6 +2,7 @@ import re
 import os
 from collections import Counter
 import csv
+import time
 
 
 def reg_tokenize(regFilter, text):
@@ -22,6 +23,7 @@ def findTxts(path):
 
 
 if __name__ == "__main__":
+    mainStartTime = time.time()
     WORD = re.compile(r'[A-Za-z—\-\'\’]*')
     token_list = list()
     for txtFile in findTxts('TextFiles'):
@@ -34,3 +36,5 @@ if __name__ == "__main__":
         csv_file.write("%s,%s\n" % ('word', 'count'))
         for key, value in count.most_common():
             csv_file.write("%s, %s\n" % (key, value))
+    print("--- %s seconds --- for all" %
+          (time.time() - mainStartTime))
