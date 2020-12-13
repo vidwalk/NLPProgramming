@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 import spacy
 import os
 from collections import defaultdict, Counter
@@ -53,10 +55,7 @@ def cleanText(text):
 
 
 if __name__ == "__main__":
-    # to check duration initialize at the start of the script
-    mainStartTime = time.time()
-    # python -m spacy download en_core_web_sm
-    nlp = spacy.load("en_core_web_sm", max_length=1529140)
+    nlp = spacy.load("en_core_web_lg", max_length=1529140)
     # Instantiate the tokenizer
     tokenizer = Tokenizer(nlp.vocab)
     result = list()
@@ -73,6 +72,3 @@ if __name__ == "__main__":
         for orth_id, count in pos_counts.most_common():
             csv_file.write("%s, %d\n" %
                            (tokens.vocab.strings[orth_id], count))
-    # get the duration of the run printed
-    print("--- %s seconds --- for all" %
-          (time.time() - mainStartTime))

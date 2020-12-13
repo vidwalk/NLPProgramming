@@ -131,6 +131,9 @@ dmypy.json
 #Visual Studio Code
 .vscode/
 
+#Pdf files to be transformed
+PdfFiles/
+
 #Text files as result of pdf transformation
 TextFiles/
 
@@ -139,3 +142,6 @@ path.txt
 
 #Counts as result of scripts
 Counts/
+
+#Sustainability Dictionaries
+SustainabilityDictionaries/

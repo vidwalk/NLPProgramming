@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 import spacy
 import os
 from collections import defaultdict, Counter
