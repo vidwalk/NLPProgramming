@@ -59,8 +59,7 @@ if __name__ == "__main__":
     mainStartTime = time.time()
     # python -m spacy download en_core_web_sm
     nlp = spacy.load("en_core_web_md", max_length=1529140)
-    pattern = [{'POS': 'VERB', 'OP': '?'},
-               {'POS': 'ADV', 'OP': '*'},
+    pattern = [{'POS': 'AUX', 'OP': '*'},
                {'POS': 'VERB', 'OP': '+'}]
     matcher = Matcher(nlp.vocab)
     matcher.add("Verb phrase", None, pattern)
